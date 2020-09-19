@@ -1,0 +1,13 @@
+@charset "utf-8";
+/* CSS Document */
+.register, .signup{
+	background-color: darkcyan;
+	color: white;
+	font-size: 20px;
+	margin-bottom: 20px;
+}
+
+a:link {color:white; text-decoration:none;}	/* 未访问的链接 */
+a:visited {color:white; text-decoration:none;}	/* 已访问的链接 */
+a:hover {color:white; text-decoration:none;}/* 鼠标移动到链接上 */
+a:active {color:white; text-decoration:none;}

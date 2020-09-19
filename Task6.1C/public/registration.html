@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Registration</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fir=no">
+        <link rel="stylesheet" type="text/css" href="css/main.css" />
+	      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    </head>
+
+    <body>
+        
+        <div class="content">
+        <div class="form-name">
+        <h1 style="color:00ff00; text-align: center;">Requester Registration</h1>
+        <br/>
+        <h4 style="color:00ff00; text-align: center;">Create an iCrowdTask Account</h4>
+        <br/>
+        </div>
+        
+        <form action="/register" method="POST"  class="form-body" style="width: 30%; margin: auto;" onsubmit="return(validate(event))">
+          <div class="country" id="country-list">
+            <label for="country">Country of residence*</label>
+            <select class="form-control" name="country" id="country" required>
+              <option value="" disabled selected hidden>Choose from list</option>
+              <option value="1">China</option>    
+              <option value="2">Aus</option>    
+              <option value="3">America</option>    
+              <option value="4">Britain</option>
+              <option value="5">Others</option>  
+            </select> 
+          </div>
+
+          <div class="form-row">
+            <div class="first-name col-6">
+              <label for="firstName">First name*</label>
+              <input type="text" class="form-control" name="firstName" id="first-name" placeholder="First name">
+            </div>
+            <div class="last-name col-6">
+              <label for="lastName">Last name*</label>
+              <input type="text" class="form-control" name="lastName" id="last-name" placeholder="last name">
+            </div>
+          </div>
+
+          <div class="email">
+            <label for="email">Email*</label>
+            <input type="text" class="form-control" name="email" id="email" placeholder="please write your email">
+          </div>
+
+          <div class="password">
+            <label for="password">Password*</label>
+            <input type="password" class="form-control" name="password" id="password" placeholder="please write your password">
+          </div>
+
+          <div class="confirmPassword">
+            <label for="confirmPassword">Confirm password*</label>
+            <input type="password" class="form-control" name="confirmPassword" id="confirmPassword" placeholder="please write your password again">
+          </div>
+
+          <div class="address">
+            <label for="address">Address*</label>
+            <input type="text" class="form-control" name="address1" id="address1" placeholder="your now address">
+            <input type="text" class="form-control" name="address2" id="address2">
+          </div>
+
+          <div class="form-row">
+            <div class="city-name col-6">
+              <label for="city">City*</label>
+              <input type="text" class="form-control" name="city" id="city" placeholder="please write your city">
+            </div>
+            <div class="state col-6">
+              <label for="state">State, Province or Region*</label>
+              <input type="text" class="form-control" name="state" id="state" placeholder="please write state">
+            </div>
+          </div>
+
+          <div class="zip">
+            <label for="zip">ZIP / Postal code</label>
+            <input type="text" class="form-control" name="zip" id="zip" placeholder="please write your Postal code">
+          </div>
+
+          <div class="phoneNumber">
+            <label for="phoneNumber">Mobile phone number</label>
+            <input type="text" class="form-control" name="phoneNumber" id="phoneNumber" placeholder="please write your phone number">
+          </div>
+          
+          <br/>
+
+          <div class="submit" style="margin: auto; text-align: center;">
+            <button type="submit" class="register" aligen="center">Create Account</button>
+          </div>
+			
+		  <div class="button" style="margin: auto; text-align: center;">
+            <button type="button" class="signup" aligen="center" ><a href="./login.html">If Your Have An Account!Please Log In</a></button>
+          </div>
+        
+        </form>
+       </div>
+
+       <script src="js/validation.js"></script>
+       <script src="js/validator.min.js"></script>
+
+    
+    </body>    
+</html>

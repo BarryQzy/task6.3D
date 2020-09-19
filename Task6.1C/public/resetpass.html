@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>iCrowdTask SignIn</title>
+
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet"
+        id="bootstrap-css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!------ Include the above in your HEAD tag ---------->
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+
+</head>
+
+<body>
+    <form action="/resetpass" method="POST" onsubmit="return(validate(event))">
+        <div class="container">
+            <hr>
+            <div class="row">
+                <aside class="col-sm-4" style="margin: auto">
+                    <h4 class="card-title mb-4 mt-1">iCrowdTask Reset Password</h4>
+                    <div class="card">
+                        <article class="card-body">
+                            <a href="./login.html" class="float-right btn btn-outline-primary">Go back</a>
+                            <h4 class="card-title mb-4 mt-1">Your Email</h4>
+                            <!-- <form action=""> -->
+                                <div class="form-group">
+                                    <!-- <label>Your email</label> -->
+                                    <input name="email" class="form-control" type="email" id="email" 
+                                        required>
+                                </div> <!-- form-group// -->
+
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary btn-block"> Submit </button>
+                                </div> <!-- form-group// -->
+                            <!-- </form> -->
+                        </article>
+                    </div>
+                </aside>
+            </div>
+
+        </div> <!-- card.// -->
+    </form>
+</body>
+
+</html>

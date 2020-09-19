@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>iCrowdTask SignIn</title>
+
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet"
+        id="bootstrap-css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!------ Include the above in your HEAD tag ---------->
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+
+</head>
+
+<body onload="init()">
+    <form onsubmit="return false ">
+        <div class="container">
+            <hr>
+            <div class="row">
+                <aside class="col-sm-4" style="margin: auto">
+                    <h4 class="card-title mb-4 mt-1">iCrowdTask Reset Password</h4>
+                    <div class="card">
+                        <article class="card-body">
+                            <a href="./login.html" class="float-right btn btn-outline-primary">Login in</a>
+                            <h4 class="card-title mb-4 mt-1">Your Email</h4>
+                            <!-- <form action=""> -->
+                            <input name="email" id="email" class="form-control" type="hidden" required>
+                            <div class="form-group">
+                                <label>Your password</label>
+                                <input name="password" id="password" class="form-control" type="password" required>
+                            </div> <!-- form-group// -->
+                            <div class="form-group">
+                                <label>Confirm password</label>
+                                <input name="password2" id="password2" class="form-control" type="password" required>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" onclick="resetPass(event)" class="btn btn-primary btn-block">
+                                    Reset
+                                </button>
+                            </div>
+                            <!-- </form> -->
+                        </article>
+                    </div>
+                </aside>
+            </div>
+
+        </div> <!-- card.// -->
+    </form>
+    <script>
+        function init() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const code = urlParams.get('code');
+            let email = atob(code);
+            console.log(email);
+            document.getElementById("email").value = email;
+        }
+        function resetPass(event) {
+            event.preventDefault();
+            let email = document.getElementById("email").value
+            let password = document.getElementById('password').value;
+            let password2 = document.getElementById('password2').value;
+            fetch('/reset', {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    email,
+                    password,
+                    password2
+                })
+            }).then(response => response.json())
+                .then(data => {
+                    if (data.reset) {
+                        window.location.href = 'login'
+                    } else {
+                        alert(data.msg)
+                    }
+                })
+                .catch(err => {
+                    alert(err)
+                })
+        }
+    </script>
+</body>
+
+
+</html>

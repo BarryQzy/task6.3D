@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-signin-client_id"
+        content="355413680466-27ohov0vs83pddqqi7emlm475hiflnq0.apps.googleusercontent.com">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1 style="color:00ff00;">request task</h1>
+
+    <a href="#" onclick="signOut();">Google Sign out</a>
+    <script>
+
+        function signOut() {
+            var auth2 = gapi.auth2.getAuthInstance();
+            auth2.signOut().then(function() {
+                console.log('User signed out.');
+                window.location.href = 'login.html'
+            });
+        }
+        function onLoad() {
+            gapi.load('auth2', function() {
+                gapi.auth2.init();
+            });
+        }
+    </script>
+    <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
+</body>
+
+
+</html>

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="google-signin-client_id"
+        content="355413680466-27ohov0vs83pddqqi7emlm475hiflnq0.apps.googleusercontent.com">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>iCrowdTask SignIn</title>
+
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet"
+        id="bootstrap-css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!------ Include the above in your HEAD tag ---------->
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+
+    <style>
+        .g-signin2 {
+            width: 100%;
+        }
+
+        .g-signin2>div {
+            margin: 0 auto;
+        }
+
+        .abcRioButton {
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body onload="init()">
+    <form id="login" onsubmit="return false ">
+        <div class="container">
+            <hr>
+            <div class="row">
+                <aside class="col-sm-4" style="margin: auto">
+                    <h4 class="card-title mb-4 mt-1">iCrowdTask Login</h4>
+                    <div class="card">
+                        <article class="card-body">
+                            <a href="./registration.html" class="float-right btn btn-outline-primary">Sign up</a>
+                            <h4 class="card-title mb-4 mt-1">Sign in</h4>
+                            <!-- <form> -->
+                            <div class="form-group">
+                                <label>Your email</label>
+                                <input name="email" class="form-control" type="email" id="email" autocomplete required>
+                            </div> <!-- form-group// -->
+
+                            <div class="form-group">
+                                <a class="float-right" href="./resetpass.html">Forgot?</a>
+                                <label>Your password</label>
+                                <input name="password" id="pass" class="form-control" type="password" id="password"
+                                    autocomplete="off" required>
+                            </div> <!-- form-group// -->
+
+                            <div class="form-group">
+                                <div class="checkbox">
+                                    <label> <input id="checkbox" type="checkbox"> Save password
+                                    </label>
+                                </div> <!-- checkbox .// -->
+                            </div> <!-- form-group// -->
+
+                            <div class="form-group">
+                                <button type="submit" onclick="login(event)" class="btn btn-primary btn-block"> Sumbit
+                                </button>
+                            </div> <!-- form-group// -->
+                            <div class="g-signin2" id="my-signin2"></div>
+                            <!-- </form> -->
+                        </article>
+                    </div>
+                </aside>
+            </div>
+
+            <script>
+                function onSignIn(googleUser) {
+
+                    var id_token = googleUser.getAuthResponse().id_token;
+                    fetch('/googlelogin', {
+                        method: "POST",
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            token: id_token,
+                        })
+                    }).then(response => response.json())
+                        .then(data => {
+                            console.log(data)
+                            if (data.loggedin) {
+                                window.location.href = 'reqtask.html'
+                            }
+                        })
+                        .catch(err => {
+                            console.log(err)
+                        })
+                }
+
+
+            </script>
+            <script>
+                function onFailure(error) {
+                    alert(error);
+                }
+                function renderButton() {
+                    gapi.signin2.render('my-signin2', {
+                        'scope': 'profile email',
+                        'width': 300,
+                        // 'height': 40,
+                        'longtitle': true,
+                        'theme': 'dark',
+                        'onsuccess': onSignIn,
+                        'onfailure': onFailure
+                    });
+                }
+            </script>
+
+            <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+            <script>
+                function init() {
+                    let user = localStorage.getItem('user');
+                    if (!user)
+                        return;
+                    user = JSON.parse(user);
+                    document.getElementById('email').value = user.email;
+                    document.getElementById('pass').value = user.pass;
+                }
+
+                function savePass(email, pass) {
+                    if (!document.getElementById('checkbox').checked) {
+                        localStorage.removeItem('user');
+                        return;
+                    }
+
+
+                    // let email = document.getElementById('email').value;
+                    // let pass = document.getElementById('pass').value;
+                    localStorage.setItem('user', JSON.stringify({
+                        email, pass
+                    }));
+                }
+
+                function login(event) {
+                    event.preventDefault();
+                    //validate(event);
+                    let email = document.getElementById('email').value;
+                    let password = document.getElementById('pass').value;
+                    fetch('/login', {
+                        method: "POST",
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            email,
+                            password
+                        })
+                    }).then(response => response.json())
+                        .then(data => {
+                            console.log(data)
+
+                            if (data.loggedin) {
+                                savePass(email, password);
+                                window.location.href = 'reqtask.html'
+                            } else {
+                                alert(data.msg)
+                            }
+                        })
+                        .catch(err => {
+                            alert(err)
+                        })
+                }
+            </script>
+        </div> <!-- card.// -->
+    </form>
+</body>
+
+</html>
